@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => '',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -46,23 +46,21 @@ AppAsset::register($this);
         
         ],
     ]);
-    echo Nav::widget([
+	
+	 echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
+          
+                  ['label' => 'Menu','visible'=>!Yii::$app->user->isGuest,
+                       'items' => [
+                           ['label' => 'Package Management', 'url' => ['/package']],
+                           ['label' => 'Book Management', 'url' => ['/booking']],
+                           ['label' => 'Logout','url' => ['/site/logout'],'linkOptions' => ['data-method' => 'post']],
+           ],
+                  ],
+               ],
+           ]);
+ 
     NavBar::end();
     ?>
 

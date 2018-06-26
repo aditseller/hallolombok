@@ -38,10 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		'label' => 'Detail'
     ]
 ]);; ?>
+<div class="col-md-12"></br></div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 

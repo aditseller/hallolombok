@@ -37,7 +37,7 @@ class Package extends \yii\db\ActiveRecord
             [['type'], 'string', 'max' => 100],
             [['package'], 'string', 'max' => 300],
             [['price'], 'string', 'max' => 20],
-            [['package'], 'unique'],
+            [['package','url'], 'unique'],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => TypePackage::className(), 'targetAttribute' => ['type' => 'type']],
         ];
     }
@@ -53,6 +53,7 @@ class Package extends \yii\db\ActiveRecord
             'package' => 'Package',
             'price' => 'Price',
             'detail' => 'Detail',
+			'url' => 'Url',
         ];
     }
 
@@ -71,4 +72,14 @@ class Package extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TypePackage::className(), ['type' => 'type']);
     }
+	
+	public function beforeSave($insert) {
+		
+		 $entities = array('?',' ');
+		 $replacements = array('','-');
+		 $this->url = str_replace($entities, $replacements, $this->package);
+		
+		
+		return parent::beforeSave($insert);
+	}
 }

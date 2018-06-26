@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PackageSearch */
+/* @var $searchModel app\models\BookingSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Packages';
+$this->title = 'Bookings';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="package-index">
+<div class="booking-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Package', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Booking', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,11 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id_package',
-            'type',
+            'id_book',
             'package',
-            'price',
-            //'detail:ntext',
+            'fullname',
+            'email:email',
+            'phone',
+            //'id_number',
+            //'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

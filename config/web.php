@@ -49,6 +49,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+				'login' => 'site/login',
+				 'travel/<id:\d+>' => 'package/view',
+                       '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                       'travel/<slug>' => 'package/slug',
             ],
         ],
         

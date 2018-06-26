@@ -3,19 +3,19 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Package;
-use app\models\PackageSearch;
+use app\models\Booking;
+use app\models\BookingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\User;
 use app\components\AccessRule;
 use yii\filters\AccessControl;
-use  yii\behaviors\SluggableBehavior;
+
 /**
- * PackageController implements the CRUD actions for Package model.
+ * BookingController implements the CRUD actions for Booking model.
  */
-class PackageController extends Controller
+class BookingController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -36,47 +36,26 @@ class PackageController extends Controller
                        'class' => AccessRule::className(),
 					   
                    ],
-                'only' => ['index','create','update'],
+                'only' => ['index','update','view'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','update'],
+                        'actions' => ['index','update','view'],
                         'allow' => true,
                         'roles' => [User::ROLE_ADMIN],
                     ],
 					
                 ],
             ],
-			
-			    [
-            'class' => SluggableBehavior::className(),
-            'attribute' => 'url',
-            'slugAttribute' => 'slug',
-			
-			
-			
-          ],
         ];
     }
-	
-	  //Sluggable function
-    public function actionSlug($slug) {
-   $model = Package::find()->where(['url'=>$slug])->one();
-		if (!is_null($model)) {
-       return $this->render('view', [
-           'model' => $model,
-       ]);
-   } else {
-     return $this->render('404',['exception'=>Yii::$app->errorHandler->exception]);
-   }
- }
 
     /**
-     * Lists all Package models.
+     * Lists all Booking models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PackageSearch();
+        $searchModel = new BookingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -86,7 +65,7 @@ class PackageController extends Controller
     }
 
     /**
-     * Displays a single Package model.
+     * Displays a single Booking model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -99,16 +78,16 @@ class PackageController extends Controller
     }
 
     /**
-     * Creates a new Package model.
+     * Creates a new Booking model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Package();
+        $model = new Booking();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_package]);
+            return $this->redirect(['view', 'id' => $model->id_book]);
         }
 
         return $this->render('create', [
@@ -117,7 +96,7 @@ class PackageController extends Controller
     }
 
     /**
-     * Updates an existing Package model.
+     * Updates an existing Booking model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -128,7 +107,7 @@ class PackageController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_package]);
+            return $this->redirect(['view', 'id' => $model->id_book]);
         }
 
         return $this->render('update', [
@@ -137,7 +116,7 @@ class PackageController extends Controller
     }
 
     /**
-     * Deletes an existing Package model.
+     * Deletes an existing Booking model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -151,15 +130,15 @@ class PackageController extends Controller
     }
 
     /**
-     * Finds the Package model based on its primary key value.
+     * Finds the Booking model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Package the loaded model
+     * @return Booking the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Package::findOne($id)) !== null) {
+        if (($model = Booking::findOne($id)) !== null) {
             return $model;
         }
 
