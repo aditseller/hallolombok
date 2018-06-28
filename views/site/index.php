@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->name;
@@ -43,50 +43,26 @@ $this->title = Yii::$app->name;
 
 <h1 style="font-weight:bold;"><center>PAKET TOUR</center></h1>
     <div class="body-content col-md-12">
-
+ 
         <div class="row">
-		
+		<?php
+$packages = app\models\Package::find()->orderBy(['id_package'=>SORT_DESC])->all();
+
+    foreach ($packages as $rowp) {
+ ?>
 		
              <div class="col-lg-3">
 			   <div class="thumbnail">
-                <img src="<?= Yii::$app->homeUrl ?>public/img/satu.jpg">
-				<h3>Desa Sade, Lombok</h3>
-                <p style="color:orange; font-weight:bold; font-size:1.3em">Rp 850.000</p>
+                <img src="<?= Yii::$app->homeUrl ?>public/img/<?= sha1($rowp->id_package) ?>.jpg">
+				<h5><b><?= $rowp->package ?></b></h5>
+                <p style="color:orange; font-weight:bold; font-size:1.3em">Rp <?= number_format($rowp->price,"0",",",".") ?></p>
            
-
-                <a class="btn btn-warning btn-block" href="http://www.yiiframework.com/doc/">Book Now</a>
+				<?= Html::a('Book Now',['/travel/'.$rowp->url],['class'=>'btn btn-warning btn-block']) ?>
+               
             </div>
             </div>
-			   <div class="col-lg-3">
-			   <div class="thumbnail">
-                <img src="<?= Yii::$app->homeUrl ?>public/img/dua.jpg">
-				<h3>Desa Sade, Lombok</h3>
-                <p style="color:orange; font-weight:bold; font-size:1.3em">Rp 850.000</p>
-           
-
-                <a class="btn btn-warning btn-block" href="http://www.yiiframework.com/doc/">Book Now</a>
-            </div>
-            </div>
-			   <div class="col-lg-3">
-			   <div class="thumbnail">
-                <img src="<?= Yii::$app->homeUrl ?>public/img/tiga.jpg">
-				<h3>Desa Sade, Lombok</h3>
-                <p style="color:orange; font-weight:bold; font-size:1.3em">Rp 850.000</p>
-           
-
-                <a class="btn btn-warning btn-block" href="http://www.yiiframework.com/doc/">Book Now</a>
-            </div>
-            </div>
-			   <div class="col-lg-3">
-			   <div class="thumbnail">
-                <img src="<?= Yii::$app->homeUrl ?>public/img/tiga.jpg">
-				<h3>Desa Sade, Lombok</h3>
-                <p style="color:orange; font-weight:bold; font-size:1.3em">Rp 850.000</p>
-           
-
-                <a class="btn btn-warning btn-block" href="http://www.yiiframework.com/doc/">Book Now</a>
-            </div>
-            </div>
+			  
+	<?php } ?>
             
         </div>
 

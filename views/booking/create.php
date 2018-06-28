@@ -8,7 +8,7 @@ use yii\captcha\Captcha;
 /* @var $model app\models\Booking */
 date_default_timezone_set("Asia/Makassar");
 $this->title = 'Booking';
-$this->params['breadcrumbs'][] = ['label' => 'Bookings', 'url' => ['index']];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="panel panel-default">

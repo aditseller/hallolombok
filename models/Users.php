@@ -19,6 +19,7 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord
 {
+	
     /**
      * {@inheritdoc}
      */
@@ -41,7 +42,8 @@ class Users extends \yii\db\ActiveRecord
             [['email'], 'unique'],
             [['fullname'], 'unique'],
             [['role'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['role' => 'id_role']],
-        ];
+			
+		];
     }
 
     /**

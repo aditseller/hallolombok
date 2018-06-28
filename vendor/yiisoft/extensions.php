@@ -66,4 +66,13 @@ return array (
       '@froala/froalaeditor' => $vendorDir . '/froala/yii2-froala-editor/src',
     ),
   ),
+  'yiisoft/yii2-imagine' => 
+  array (
+    'name' => 'yiisoft/yii2-imagine',
+    'version' => '2.1.1.0',
+    'alias' => 
+    array (
+      '@yii/imagine' => $vendorDir . '/yiisoft/yii2-imagine/src',
+    ),
+  ),
 );

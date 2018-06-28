@@ -20,6 +20,7 @@ use Yii;
 class Booking extends \yii\db\ActiveRecord
 {
 	public $verifyCode;
+	public $image;
     /**
      * {@inheritdoc}
      */
@@ -44,7 +45,8 @@ class Booking extends \yii\db\ActiveRecord
             [['id_number'], 'unique'],
 			[['verifyCode'],'captcha'],
             [['package'], 'exist', 'skipOnError' => true, 'targetClass' => Package::className(), 'targetAttribute' => ['package' => 'package']],
-        ];
+			[['image'], 'image','extensions'=>'jpg,png','maxSize' => 5000000, ],
+		];
     }
 
     /**

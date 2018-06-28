@@ -12,6 +12,8 @@ use app\models\User;
 use app\components\AccessRule;
 use yii\filters\AccessControl;
 use  yii\behaviors\SluggableBehavior;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
 /**
  * PackageController implements the CRUD actions for Package model.
  */
@@ -108,13 +110,21 @@ class PackageController extends Controller
         $model = new Package();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_package]);
-        }
+			
+			$model->image = UploadedFile::getInstance($model,'image');
+          $model->image->saveAs('public/img/'.sha1($model->id_package).'.jpg');
+
+
+              //Create Thumbnail Image and Resize
+       Image::thumbnail('public/img/'.sha1($model->id_package).'.jpg',640,480)->save('public/img/'.sha1($model->id_package).'.jpg');
+            return $this->redirect(['index']);
+        } else {
 
         return $this->render('create', [
             'model' => $model,
         ]);
     }
+	}
 
     /**
      * Updates an existing Package model.

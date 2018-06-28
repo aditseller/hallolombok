@@ -18,6 +18,7 @@ use Yii;
  */
 class Package extends \yii\db\ActiveRecord
 {
+	public $image;
     /**
      * {@inheritdoc}
      */
@@ -39,7 +40,8 @@ class Package extends \yii\db\ActiveRecord
             [['price'], 'string', 'max' => 20],
             [['package','url'], 'unique'],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => TypePackage::className(), 'targetAttribute' => ['type' => 'type']],
-        ];
+			[['image'], 'image','extensions'=>'jpg,png','maxSize' => 5000000, ],
+		];
     }
 
     /**
